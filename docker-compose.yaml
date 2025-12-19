@@ -1,0 +1,20 @@
+services:
+  video2rtsp:
+    build:
+      dockerfile: video2rtsp/Dockerfile
+    container_name: video-with-audio-streamer
+    privileged: true
+    environment:
+      - VIDEO_DEVICE=/dev/video0
+      - AUDIO_DEVICE=plughw:1,0
+    ports:
+      - "8554:8554"
+    restart: unless-stopped
+  streamer:
+    build:
+      dockerfile: streamer/Dockerfile
+    container_name: streamer
+    ports:
+      - "8080:8000"
+    restart: unless-stopped
+
