@@ -17,7 +17,8 @@ from flask import Flask, request, Response, send_from_directory, abort
 
 
 USER = os.getenv("BASIC_AUTH_USER", "admin")
-PASS = os.getenv("BASIC_AUTH_PASS", "password")
+# use BASIC_AUTH_PASSWORD to match docker-compose and common naming
+PASS = os.getenv("BASIC_AUTH_PASSWORD", "password")
 REALM = os.getenv("BASIC_AUTH_REALM", "Restricted")
 AUTH_ALL = os.getenv("AUTH_ALL", "0").lower() in ("1", "true", "yes")
 PORT = int(os.getenv("PORT", "8000"))
