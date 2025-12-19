@@ -16,8 +16,8 @@ cleanup() {
 
 trap cleanup TERM INT
 
-# Start python http.server in background and keep PID
-python3 -m http.server 8000 &
+# Start our authenticated HTTP server in background and keep PID
+python3 /app/main.py &
 PY_PID=$!
 
 # Wait for either to exit, then run cleanup
