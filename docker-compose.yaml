@@ -4,9 +4,11 @@ services:
       dockerfile: video2rtsp/Dockerfile
     container_name: video-with-audio-streamer
     privileged: true
+    devices:
+      - /dev/vchiq:/dev/vchiq
     environment:
       - VIDEO_DEVICE=/dev/video0
-      - AUDIO_DEVICE=plughw:1,0
+      - AUDIO_DEVICE=plughw:2,0
     ports:
       - "8554:8554"
     restart: unless-stopped
@@ -15,8 +17,9 @@ services:
       dockerfile: streamer/Dockerfile
     container_name: streamer
     environment:
+    - TZ=Asia/Tokyo
     - BASIC_AUTH_USER=admin
-    - BASIC_AUTH_PASSWORD=password
+    - BASIC_AUTH_PASS=password
     ports:
       - "8080:8000"
     restart: unless-stopped
